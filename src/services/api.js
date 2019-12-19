@@ -1,5 +1,19 @@
 import axios from 'axios';
 
+/**
+ * 
+ * Todas funções dessa classe devem ser chamadas em promisses async
+ * async () => {
+ *     await Api.metodo();
+ * }
+ * 
+ * //////////////////////////////////////////////////////////////////
+ * 
+ * @Class Api
+ * 
+ * Chama funções de requisição http, para dados e afins.
+ * 
+ */
 
 class Api {
 
