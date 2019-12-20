@@ -18,12 +18,23 @@ import axios from 'axios';
 class Api {
 
     Axios = axios.create({
-        baseURL: '',
+        baseURL: 'http://agencialazo.com.br/villagio/api/',
     });
+
+    login(tel , pass){
+        this.Axios.post('login',{
+            'telefone': tel,
+            'password': pass
+        })
+        .then(function(response){
+            res = JSON.parse(response);
+        })
+        return res;
+    }
 
     getCardapio(){
         var cardapio;
-        this.Axios.get('api/cardapio')
+        this.Axios.get('cardapio')
         .then(function(response){
             cardapio = JSON.parse(response);
         });
@@ -32,25 +43,16 @@ class Api {
 
     getPromocoes(){
         var promocoes;
-        this.Axios.get('api/promocoes')
+        this.Axios.get('promocoes')
         .then(function(response){
             promocoes = JSON.parse(response);
         });
         return promocoes;
     }
 
-    getDetails(id){
-        var details;
-        this.Axios.get('api/details/'+id)
-        .then(function(response){
-            details = JSON.parse(response);
-        });
-        return details;
-    }
-
     getStatusPedido(id){
         var status;
-        this.Axios.get('api/status/'+id)
+        this.Axios.get('status/'+id)
         .then(function(response){
             status = JSON.parse(response);
         });
