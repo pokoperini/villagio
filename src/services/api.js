@@ -19,42 +19,54 @@ class Api {
 
     Axios = axios.create({
         baseURL: 'http://agencialazo.com.br/villagio/api/',
+        auth: {
+            password: 'Q1w2e3r4!'
+          },
     });
 
-    login(tel , pass){
-        this.Axios.post('login',{
+    async login(tel , pass){
+        await this.Axios.post('login',{
             'telefone': tel,
             'password': pass
         })
         .then(function(response){
-            res = JSON.parse(response);
+            res = response.data;
         })
         return res;
     }
 
-    getCardapio(){
+    async getCardapio(){
         var cardapio;
-        this.Axios.get('cardapio')
+        await this.Axios.get('cardapio')
         .then(function(response){
-            cardapio = JSON.parse(response);
+            cardapio = response.data;
         });
         return cardapio;
     }
 
-    getPromocoes(){
+    async getPromocoes(){
         var promocoes;
-        this.Axios.get('promocoes')
+        await this.Axios.get('promocoes')
         .then(function(response){
-            promocoes = JSON.parse(response);
+            promocoes = response.data;
         });
         return promocoes;
     }
 
-    getStatusPedido(id){
-        var status;
-        this.Axios.get('status/'+id)
+    async getCategorias(){
+        var categorias;
+        await this.Axios.get('categorias')
         .then(function(response){
-            status = JSON.parse(response);
+            categorias = response.data;
+        });
+        return categorias;
+    }
+
+    async getStatusPedido(id){
+        var status;
+        await this.Axios.get('status/'+id)
+        .then(function(response){
+            status = response.data;
         });
         return status;
     }

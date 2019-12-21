@@ -10,6 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather'
 import assets from '../../assets';
 import styles from '../../styles'
+import api from '~/services/api';
 
 
 export default class Pedido extends Component {
@@ -22,7 +23,6 @@ export default class Pedido extends Component {
     state = {
     }
 
-
     render(){
         return(
             <ImageBackground 
@@ -30,7 +30,6 @@ export default class Pedido extends Component {
             style={styles.default.bg}
             >
 
-                
             </ImageBackground>
         );
     }
