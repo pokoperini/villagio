@@ -11,33 +11,42 @@ import styles from '../styles'
 
 const Btn1 = ({
     text,
-    onPress
+    onPress,
+    load
 }) => {
     return(
         <TouchableOpacity onPress={onPress} style={styles.buttons.btn1} >
-            <Text style={styles.buttons.text1}>{text}</Text>
+            {
+            load ? <ActivityIndicator size={30} color='#F2B705'/> : <Text style={styles.buttons.text1}>{text}</Text>
+            }
         </TouchableOpacity>
     );
 };
 
 const Btn2 = ({
     text,
-    onPress
+    onPress,
+    load
 }) => {
     return(
         <TouchableOpacity onPress={onPress} style={styles.buttons.btn2} >
-            <Text style={styles.buttons.text2}>{text}</Text>
+            {
+            load ? <ActivityIndicator size={30} color='white'/> : <Text style={styles.buttons.text2}>{text}</Text>
+            }
         </TouchableOpacity>
     );
 };
 
 const Btn3 = ({
     text,
-    onPress
+    onPress,
+    load
 }) => {
     return(
         <TouchableOpacity onPress={onPress} style={styles.buttons.btn1} >
-            <Text style={styles.buttons.text1}>{text}</Text>
+            {
+            load ? <ActivityIndicator size={30} color='white'/> : <Text style={styles.buttons.text1}>{text}</Text>
+            }
         </TouchableOpacity>
     );
 };

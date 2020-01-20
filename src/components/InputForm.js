@@ -51,7 +51,7 @@ export default class InputForm extends Component {
     render(){
         const fontSize = this.fontSize.interpolate({
             inputRange: [0, 1],
-            outputRange: [14, 11]
+            outputRange: [18, 12]
         });
         const textY = this.textY.interpolate({
         inputRange: [0, 1],

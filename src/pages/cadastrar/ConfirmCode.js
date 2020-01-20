@@ -7,10 +7,12 @@ import {
     ImageBackground,
     ActivityIndicator
 } from 'react-native';
-import styles from '../styles'
-import FormParent from '../components/FormParent';
-import InputForm from '../components/InputForm';
-import { Btn2 } from '../components/Buttons';
+import styles from '~/styles'
+import FormParent from '~/components/FormParent';
+import InputForm from '~/components/InputForm';
+import { Btn2 } from '~/components/Buttons';
+import AsyncStorage from '@react-native-community/async-storage';
+import api from '~/services/api';
 
 
 export default class ConfirmCode extends Component {
@@ -20,11 +22,27 @@ export default class ConfirmCode extends Component {
     };
 
     state = {
-        padding: 95
+        padding: 95,
+        code: '',
+        load:false
     }
 
-    confirm = () => {
-        
+    confirm = async () => {
+
+        if(this.state.code ){
+            this.setState({load:true});
+            let user = this.props.navigation.getParam('user');
+            let data = await api.confirmCode(user.id,this.state.code);
+            if(data.confirm){
+                await AsyncStorage.setItem('user',JSON.stringify(user));
+                this.props.navigation.navigate('Step4',{user: user});
+            }else{
+                alert('O código está incorreto');
+            }
+            this.setState({load:false});
+        }else{
+            alert('Algo está faltando.');
+        }
     }
 
     onFocus(val){
@@ -51,8 +69,8 @@ export default class ConfirmCode extends Component {
                 </Text>
                 <InputForm title='Código' onChangeText={(code) => { this.setState({code}); }} 
                 onFocus={() => {this.onFocus(50)}} onBlur={() => this.onBlur()} />
-                <View style={styles.default.highBtn}>
-                    <Btn2 text='Confirmar' onPress={this.confirm}/>
+                <View style={styles.cadastrar.highBtn}>
+                    <Btn2 text='Confirmar' load={this.state.load} onPress={this.confirm}/>
                 </View>
             </FormParent>
         );

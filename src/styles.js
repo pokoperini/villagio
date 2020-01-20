@@ -45,6 +45,22 @@ export default styles = {
             marginRight: 5
         }
     }),
+    cadastrar: StyleSheet.create({
+        pic:{
+            alignItems: 'center'
+        },
+        scroll:{
+            alignItems: 'center',
+            paddingBottom: 100
+        },
+        scrollView:{
+            height: dim.height - 430
+        },
+        highBtn: {
+            position: 'absolute',
+            bottom: 50  
+        }
+    }),
     //components
     formParent: StyleSheet.create({
         buttonBack: {
@@ -61,7 +77,7 @@ export default styles = {
         form: {
             flex: 1,
             alignItems: 'center',
-        }
+        },
     }),
     InputForms: StyleSheet.create({
         View: {
@@ -82,16 +98,16 @@ export default styles = {
             fontFamily: 'Metropolis-Regular',
             color: '#9B9B9B',
             marginLeft: 20,
-            fontSize: 14,
             position: 'absolute'
         },
         inputText: {
             fontFamily: 'Metropolis-Medium',
             color: '#2D2D2D',
-            fontSize: 14,
-            lineHeight: 18,
+            fontSize: 18,
+            lineHeight: 20,
             marginLeft: 17,
-            paddingVertical: 24,
+            paddingTop: 28,
+            paddingBottom: 12,
         },
         instructions:{
             color: 'white',

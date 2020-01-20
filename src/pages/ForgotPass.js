@@ -11,6 +11,7 @@ import styles from '../styles'
 import FormParent from '../components/FormParent';
 import InputForm from '../components/InputForm';
 import { Btn2 } from '../components/Buttons';
+import api from '~/services/api';
 
 
 export default class ForgotPass extends Component {
@@ -22,11 +23,19 @@ export default class ForgotPass extends Component {
     
     state = {
         padding: 95,
-        telefone: ''
+        telefone: '',
+        load: false
     }
 
-    send = () => {
-        console.log('telefone: ', this.state.telefone);
+    send = async () => {
+        if(this.state.telefone){
+            this.setState({load:true});
+            let res = await api.sendTel(this.state.telefone);
+            if(res.confirm){
+                alert('Número enviado, se esse número estiver cadastrado mandaremos um link para a troca de senha.');
+            }
+        }
+        this.setState({load:false});
     }
 
     onFocus(val){
@@ -56,7 +65,7 @@ export default class ForgotPass extends Component {
                 onBlur={() => this.onBlur()}
                 onChangeText={(telefone) => { this.setState({telefone}); }}/>
                 <View style={styles.default.highBtn}>
-                    <Btn2 text='Enviar' onPress={this.send}/>
+                    <Btn2 load={this.state.load} text='Enviar' onPress={this.send}/>
                 </View>
             </FormParent>
         );

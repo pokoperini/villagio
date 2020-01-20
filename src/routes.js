@@ -11,20 +11,44 @@ import { createStackNavigator } from 'react-navigation-stack';
 import React, { Component } from 'react';
 import { View , Image , TouchableOpacity} from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Icon from 'react-native-vector-icons/SimpleLineIcons'
+
 
 
 import Login from './pages/Login';
 import Start from "./pages/Start";
-import Cadastrar from "./pages/Cadastrar";
 import ForgotPass from "./pages/ForgotPass";
-import ConfirmCode from "./pages/ConfirmCode";
-import Cardapio from "./pages/main/Cardapio";
+
+import Step1 from "./pages/cadastrar/Step1";
+import Step2 from "./pages/cadastrar/Step2";
+import ConfirmCode from "./pages/cadastrar/ConfirmCode";
+import step4 from "./pages/cadastrar/Step4";
+import step5 from "./pages/cadastrar/Step5";
+
+import Cardapio from "./pages/main/Cardapio/Cardapio";
+import Item from "./pages/main/Cardapio/Item";
 import Pedido from "./pages/main/Pedido";
 import User from "./pages/main/User";
 
 
+const CardapioNav = createStackNavigator({
+    Lista: Cardapio,
+    Item: Item,
+}, {
+  initialRouteName: 'Lista',
+  headerMode: 'screen',
+  navigationOptions: {
+    title: 'Cardápio',
+    tabBarIcon: ({ tintColor }) => (<Icon name={'book-open'} size={30} color={tintColor} />)
+  },
+  defaultNavigationOptions: ({navigation}) =>  ({
+      header: null
+  })
+})
+
+
 const Main = createBottomTabNavigator({
-    Cardapio: Cardapio,
+    Cardapio: CardapioNav,
     Pedido: Pedido,
     User: User 
   },
@@ -53,6 +77,21 @@ const Main = createBottomTabNavigator({
   }
 );
 
+const Cadastrar = createStackNavigator({
+  Step1: Step1,
+  Step2: Step2,
+  ConfirmCode: ConfirmCode,
+  Step4: step4,
+  Step5: step5,
+},  {
+      initialRouteName: 'Step5',
+      headerMode: 'screen',
+      defaultNavigationOptions: ({navigation}) =>  ({
+          header: null
+      })
+  }  
+)
+
 const a = createStackNavigator({
     Start: Start,
     Login: Login,
@@ -61,7 +100,7 @@ const a = createStackNavigator({
     ConfirmCode: ConfirmCode,
     Main: Main
 },  {
-        initialRouteName: 'Start',
+        initialRouteName: 'Main',
         headerMode: 'screen',
         defaultNavigationOptions: ({navigation}) =>  ({
             header: null

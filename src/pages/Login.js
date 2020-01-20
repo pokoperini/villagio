@@ -13,6 +13,8 @@ import styles from '../styles'
 import FormParent from '../components/FormParent';
 import InputForm from '../components/InputForm';
 import { Btn2 } from '../components/Buttons';
+import api from '~/services/api';
+
 
 
 export default class Login extends Component {
@@ -28,13 +30,31 @@ export default class Login extends Component {
     state = {
         padding: 75,
         telefone: '',
-        senha: ''
+        senha: '',
+        load: false,
+        error: false,
     }
 
-    login = () =>{
-        // console.log('telefone: ',this.state.telefone);
-        // console.log('senha: ',this.state.senha);
-        this.props.navigation.navigate('Main')
+    login = async () =>{
+
+        if(this.state.telefone && this.state.senha){
+            this.setState({load:true});
+            let login = await api.login(this.state.telefone,this.state.senha);
+            console.log(login);
+            if(login.confirm){
+                // OneSignal.setExternalUserId(login.data.user);
+                this.props.navigation.pop(1);
+                this.props.navigation.replace({
+                    routeName: 'Main'
+                });
+                this.setState({error:false});
+            }else{
+                this.setState({error:true});
+            }
+            this.setState({load:false});
+        }else{
+            this.setState({error:true});
+        }
     }
 
     onFocus(val){
@@ -50,14 +70,14 @@ export default class Login extends Component {
     }
 
     render(){
-
+        let t = this.state.load ? 't' : '';
         return(
             <FormParent title='Login' onPressBack={() => this.props.navigation.goBack()} 
             styleConatiner={{
                 paddingTop: this.state.padding
             }}
             >
-                <InputForm title='Telefone' onChangeText={(telefone) => { this.setState({telefone}); }} />
+                <InputForm keyboardType='phone-pad' title='Telefone' onChangeText={(telefone) => { this.setState({telefone}); }} />
                 <InputForm title='Senha' onChangeText={(senha) => { this.setState({senha}); }}
                 secureTextEntry
                 onFocus={() => {this.onFocus(40)}} onBlur={() => this.onBlur()} />
@@ -74,7 +94,7 @@ export default class Login extends Component {
                 </TouchableOpacity>
 
                 <View style={styles.default.highBtn}>
-                    <Btn2 text='login' onPress={this.login}/>
+                    <Btn2 text={'login'} load={this.state.load} onPress={this.login}/>
                 </View>
             </FormParent>
         );

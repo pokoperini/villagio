@@ -5,7 +5,6 @@ import {
     Image,
     TouchableOpacity,
     ImageBackground,
-    ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
 import assets from '../assets';
