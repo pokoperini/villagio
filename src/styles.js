@@ -61,6 +61,35 @@ export default styles = {
             bottom: 50  
         }
     }),
+    cardapio: StyleSheet.create({
+        picker: {
+            height: 60, 
+            borderColor: '#bdbebf',
+            borderWidth: 2,
+            borderRadius: 30,
+        },
+        DropdownMenu:{
+            width: dim.width - 60,
+            alignSelf: 'center',
+            marginVertical: 25,
+        },
+        pickerList: {
+            
+        },
+        pickerContainer: {
+            width: dim.width - 60,
+            alignSelf: 'center'
+        },
+        SelectorContainer: {
+            borderColor: '#bdbebf',
+            borderWidth: 2,
+            width: dim.width - 60,
+            alignSelf: 'center',
+        },
+        TextDropdown: {
+            paddingLeft: 15
+        }
+    }),
     //components
     formParent: StyleSheet.create({
         buttonBack: {

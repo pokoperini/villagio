@@ -157,6 +157,15 @@ class Api {
         return categorias;
     }
 
+    async getSabores(){
+        var sabores;
+        await this.Axios.get('sabores')
+        .then(function(response){
+            sabores = response.data;
+        }).catch(err=> this.catch(err));
+        return sabores;
+    }
+
     async getStatusPedido(id){
         var status;
         await this.Axios.get('status/'+id)
